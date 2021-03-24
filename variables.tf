@@ -1,0 +1,9 @@
+variable "cluster_size"  { type = "string" }
+variable "db_name"       { type = "string" }
+variable "db_pass"       { type = "string" }
+variable "instance_type" { type = "string" }
+variable "jumpbox_cidr"  { type = "string" }
+variable "tags"          { type = "map"    }
+variable "cidr_rules"    { type = "list"   }
+variable "dns_zone_name" { type = "string" }
+variable "sgid_rules"    { type = "list"   }

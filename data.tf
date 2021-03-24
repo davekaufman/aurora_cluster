@@ -14,12 +14,17 @@ data "aws_subnet" "backend" {
   }
 }
 
-data "aws_subnet" "db" {
+data "aws_subnet_ids" "db" {
   vpc_id = "${data.aws_vpc.default.id}"
 
   tags   = {
     Name = "databases"
   }
+}
+
+data "aws_subnet" "db" {
+  count = "${length(data.aws_subnet_ids.db.ids)}"
+  id = "${data.aws_subnet_ids.db.ids[count.index]}"
 }
 
 data "aws_route53_zone" "prod" {

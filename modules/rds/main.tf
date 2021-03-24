@@ -17,7 +17,6 @@ resource "aws_rds_cluster_instance" "cluster" {
   apply_immediately          = true
   tags                       = "${merge(var.tags, map("Name", "${var.db_name}"))}"
 
-  lifecycle { ignore_changes = ["master_password"] }
 }
 
 resource "aws_rds_cluster" "cluster" {
@@ -34,4 +33,6 @@ resource "aws_rds_cluster" "cluster" {
   iam_roles                  = ["${aws_iam_role.rds.arn}"]
   final_snapshot_identifier  = "cluster-final-snap"
   apply_immediately          = true
+
+  lifecycle { ignore_changes = ["master_password"] }
 }

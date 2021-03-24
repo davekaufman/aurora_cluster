@@ -1,8 +1,8 @@
-data "aws_caller_identity" "current" {}
+# data "aws_caller_identity" "current" {}
 
 data "aws_vpc" "default" {
   tags   = {
-    Name = "Default"
+    Name = "${var.vpc_name}"
   }
 }
 
@@ -10,7 +10,7 @@ data "aws_subnet" "backend" {
   vpc_id = "${data.aws_vpc.default.id}"
 
   tags   = {
-    Name = "backend"
+    Name = "${var.backend_subnet_name}"
   }
 }
 
@@ -18,7 +18,7 @@ data "aws_subnet_ids" "db" {
   vpc_id = "${data.aws_vpc.default.id}"
 
   tags   = {
-    Name = "databases"
+    Name = "${var.db_subnet_name}"
   }
 }
 
